@@ -2,6 +2,7 @@ import { Calendar } from "@/components/ui/calendar";
 import Image from "next/image";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { promises } from "fs";
+import Link from "next/link";
 
 export default async function BookingLapanganHome() {
   const file = await promises.readFile(
@@ -107,9 +108,12 @@ export default async function BookingLapanganHome() {
               </div>
 
               <div className="flex justify-end">
-                <button className=" bg-blue-300 rounded-full p-3 text-white">
+                <Link
+                  className=" bg-blue-300 rounded-full p-3 text-white"
+                  href={"/informasi-pemesanan"}
+                >
                   Lanjut Konfirmasi
-                </button>
+                </Link>
               </div>
             </div>
           </div>
