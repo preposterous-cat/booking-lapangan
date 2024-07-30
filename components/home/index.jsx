@@ -11,6 +11,13 @@ const HomeComponent = async () => {
   );
   const data = JSON.parse(file);
 
+  const file_booking = await promises.readFile(
+    process.cwd() + "/data/list-booking-by-username.json",
+    "utf8"
+  );
+
+  const data_booking = JSON.parse(file_booking);
+
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col gap-10 border-b border-gray-200 pb-10">
@@ -94,65 +101,72 @@ const HomeComponent = async () => {
           <h2 className="font-bold">Berkas Baru</h2>
           <button className=" text-orange-400">Lihat Semua</button>
         </div>
-        <div className="flex flex-col shadow-lg p-3 w-96">
-          <div className="flex gap-2 border-b border-gray-200 py-2">
-            <svg
-              width="32"
-              height="32"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="32" height="32" rx="16" fill="#F9F9F9" />
-              <path
-                d="M20.1105 16.3961C18.2367 16.3961 16.7211 17.9165 16.7211 19.7856C16.7211 21.6594 18.2367 23.175 20.1105 23.175C21.9843 23.175 23.5 21.6594 23.5 19.7856C23.5 17.9165 21.9843 16.3961 20.1105 16.3961ZM20.1105 22.4255C18.6518 22.4255 17.4706 21.2443 17.4706 19.7856C17.4706 18.3268 18.6518 17.1456 20.1105 17.1456C21.5693 17.1456 22.7505 18.3268 22.7505 19.7856C22.7505 21.2443 21.5693 22.4255 20.1105 22.4255ZM21.5194 9.94924C21.5194 9.14991 20.8719 8.5 20.0702 8.5H9.94924C9.14991 8.5 8.5 9.14753 8.5 9.94924V10.9715H21.5194V9.94924ZM16.9986 9.91841H13.0209C12.9213 9.91841 12.8406 9.83776 12.8406 9.73814C12.8406 9.63852 12.9213 9.5555 13.0209 9.5555H16.9986C17.0982 9.5555 17.1812 9.63615 17.1812 9.73814C17.1812 9.83776 17.0982 9.91841 16.9986 9.91841Z"
-                fill="#6EAA44"
-              />
-              <path
-                d="M21.6001 19.648H20.5446C20.5043 19.5199 20.4118 19.4179 20.2908 19.3657V17.8003C20.2908 17.7006 20.2102 17.6176 20.1082 17.6176C20.0085 17.6176 19.9279 17.6983 19.9279 17.8003V19.3657C19.7642 19.4369 19.6504 19.5982 19.6504 19.7879C19.6504 20.0417 19.8567 20.2481 20.1105 20.2481C20.2813 20.2481 20.4284 20.1532 20.5066 20.0133H21.6001C21.6997 20.0133 21.7827 19.9326 21.7827 19.8306C21.7827 19.7286 21.6997 19.648 21.6001 19.648ZM20.1105 15.9217C20.6086 15.9217 21.083 16.0189 21.5218 16.1921V11.4459H8.5V19.3325C8.5 20.1319 9.14753 20.7794 9.94924 20.7794H16.3795C16.2941 20.4615 16.2443 20.1295 16.2443 19.7856C16.2467 17.6556 17.9782 15.9217 20.1105 15.9217ZM18.8273 12.1195H20.5019V13.7324H18.8273V12.1195ZM15.815 12.1195H17.4896V13.7324H15.815V12.1195ZM11.4673 19.3064H9.79269V17.6935H11.4673V19.3064ZM11.4673 16.5194H9.79269V14.9065H11.4673V16.5194ZM11.4673 13.7324H9.79269V12.1195H11.4673V13.7324ZM14.4796 19.3064H12.805V17.6935H14.4796V19.3064ZM14.4796 16.5194H12.805V14.9065H14.4796V16.5194ZM14.4796 13.7324H12.805V12.1195H14.4796V13.7324ZM15.815 14.9065H17.4896V16.5194H15.815V14.9065Z"
-                fill="#F58465"
-              />
-            </svg>
-            <button className="flex flex-col">
-              <p className="font-bold">Harry Maguire S.Kom</p>
-              <p className="flex items-center gap-2">
-                25 Januari{" "}
-                <svg
-                  width="4"
-                  height="4"
-                  viewBox="0 0 4 4"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
-                </svg>
-                10:28
-              </p>
-            </button>
-          </div>
 
-          <div className="flex gap-2 py-2 justify-between">
-            <div></div>
-            <button className="flex flex-col items-center">
-              <p className="font-bold">Lapangan Bola Kamboja</p>
-              <p className="flex items-center gap-2 justify-start">
-                Sesi 1{" "}
+        <div className="flex flex-wrap gap-2">
+          {data_booking.bookings.map((item, i) => (
+            <div className="flex flex-col shadow-lg p-3 w-96" key={i}>
+              <div className="flex gap-2 border-b border-gray-200 py-2">
                 <svg
-                  width="4"
-                  height="4"
-                  viewBox="0 0 4 4"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                  <rect width="32" height="32" rx="16" fill="#F9F9F9" />
+                  <path
+                    d="M20.1105 16.3961C18.2367 16.3961 16.7211 17.9165 16.7211 19.7856C16.7211 21.6594 18.2367 23.175 20.1105 23.175C21.9843 23.175 23.5 21.6594 23.5 19.7856C23.5 17.9165 21.9843 16.3961 20.1105 16.3961ZM20.1105 22.4255C18.6518 22.4255 17.4706 21.2443 17.4706 19.7856C17.4706 18.3268 18.6518 17.1456 20.1105 17.1456C21.5693 17.1456 22.7505 18.3268 22.7505 19.7856C22.7505 21.2443 21.5693 22.4255 20.1105 22.4255ZM21.5194 9.94924C21.5194 9.14991 20.8719 8.5 20.0702 8.5H9.94924C9.14991 8.5 8.5 9.14753 8.5 9.94924V10.9715H21.5194V9.94924ZM16.9986 9.91841H13.0209C12.9213 9.91841 12.8406 9.83776 12.8406 9.73814C12.8406 9.63852 12.9213 9.5555 13.0209 9.5555H16.9986C17.0982 9.5555 17.1812 9.63615 17.1812 9.73814C17.1812 9.83776 17.0982 9.91841 16.9986 9.91841Z"
+                    fill="#6EAA44"
+                  />
+                  <path
+                    d="M21.6001 19.648H20.5446C20.5043 19.5199 20.4118 19.4179 20.2908 19.3657V17.8003C20.2908 17.7006 20.2102 17.6176 20.1082 17.6176C20.0085 17.6176 19.9279 17.6983 19.9279 17.8003V19.3657C19.7642 19.4369 19.6504 19.5982 19.6504 19.7879C19.6504 20.0417 19.8567 20.2481 20.1105 20.2481C20.2813 20.2481 20.4284 20.1532 20.5066 20.0133H21.6001C21.6997 20.0133 21.7827 19.9326 21.7827 19.8306C21.7827 19.7286 21.6997 19.648 21.6001 19.648ZM20.1105 15.9217C20.6086 15.9217 21.083 16.0189 21.5218 16.1921V11.4459H8.5V19.3325C8.5 20.1319 9.14753 20.7794 9.94924 20.7794H16.3795C16.2941 20.4615 16.2443 20.1295 16.2443 19.7856C16.2467 17.6556 17.9782 15.9217 20.1105 15.9217ZM18.8273 12.1195H20.5019V13.7324H18.8273V12.1195ZM15.815 12.1195H17.4896V13.7324H15.815V12.1195ZM11.4673 19.3064H9.79269V17.6935H11.4673V19.3064ZM11.4673 16.5194H9.79269V14.9065H11.4673V16.5194ZM11.4673 13.7324H9.79269V12.1195H11.4673V13.7324ZM14.4796 19.3064H12.805V17.6935H14.4796V19.3064ZM14.4796 16.5194H12.805V14.9065H14.4796V16.5194ZM14.4796 13.7324H12.805V12.1195H14.4796V13.7324ZM15.815 14.9065H17.4896V16.5194H15.815V14.9065Z"
+                    fill="#F58465"
+                  />
                 </svg>
-                06:00 - 12:00
-              </p>
-            </button>
-            <p className="self-end bg-orange-400 text-white rounded-full px-2">
-              On Progress
-            </p>
-          </div>
+                <button className="flex flex-col">
+                  <p className="font-bold">{item.userId.fullName}</p>
+                  <p className="flex items-center gap-2">
+                    25 Januari{" "}
+                    <svg
+                      width="4"
+                      height="4"
+                      viewBox="0 0 4 4"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                    </svg>
+                    10:28
+                  </p>
+                </button>
+              </div>
+
+              <div className="flex gap-2 py-2 justify-between">
+                <div></div>
+                <button className="flex flex-col items-center">
+                  <p className="font-bold text-start">
+                    {item.sportsFieldId.sportsFieldName}
+                  </p>
+                  <p className="flex items-center gap-2 justify-start">
+                    Sesi {item.totalSessionBooking}{" "}
+                    <svg
+                      width="4"
+                      height="4"
+                      viewBox="0 0 4 4"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle cx="2" cy="2" r="2" fill="#D9D9D9" />
+                    </svg>
+                    06:00 - 12:00
+                  </p>
+                </button>
+                <p className="self-end bg-orange-400 text-white rounded-full px-2">
+                  {item.bookingStatus}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
